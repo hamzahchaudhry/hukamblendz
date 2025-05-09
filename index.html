@@ -1,13 +1,82 @@
-<!doctype html>
+<!-- index.html -->
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Barber Shop</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="icon" href="/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <!-- Logo Header -->
+    <header>
+      <img src="/logo.png" alt="Barber Shop Logo" class="logo" />
+    </header>
+
+    <!-- Intro Video -->
+    <div class="video-container">
+      <video
+        src="/intro.mp4"
+        class="intro-video"
+        controls
+        autoplay
+        muted
+        loop
+        playsinline
+      >
+        Sorry, your browser doesn’t support embedded videos.
+      </video>
+    </div>
+
+    <!-- Book Now CTA under the video -->
+    <div class="video-cta">
+      <a
+        href="https://hukamblendz.setmore.com/"
+        class="booking-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Book Now
+      </a>
+    </div>
+
+    <!-- Gallery: 4 images in a row -->
+    <section class="gallery">
+      <img src="/beard.png" alt="Beard Work" />
+      <img src="/burst.png" alt="Burst Fade" />
+      <img src="/taper.png" alt="High Taper Fade" />
+      <img src="/skinfade.jpg" alt="Low Skin Fade" />
+    </section>
+
+    <!-- Social Icons -->
+    <div class="social-icons">
+      <a
+        href="https://instagram.com/hukamblendz/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src="/instagram.png" alt="Instagram" />
+      </a>
+      <a
+        href="https://facebook.com/YourPageName"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src="/facebook.png" alt="Facebook" />
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2025 Hamzah Chaudhry. All rights reserved.</p>
+      </div>
+    </footer>
   </body>
 </html>

@@ -3,34 +3,35 @@ name: Build & Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main    # or your default branch
+      - main   # ← or your default branch
+
+# no special permissions needed here
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      # 1) Check out the code
+
+      # 1. Check out your code
       - name: Checkout
         uses: actions/checkout@v3
 
-      # 2) Set up Node.js
-      - name: Setup Node.js
+      # 2. Install Node & deps, then build
+      - name: Setup Node & Install
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build Site
+        run: npm run build
 
-      # 3) Install deps & build
-      - name: Install and build
-        run: |
-          npm ci
-          npm run build
-
-      # 4) Deploy the `dist/` folder to the `gh-pages` branch
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      # 3. Push `dist/` to gh-pages
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages           # the branch the action should deploy to
-          folder: dist               # the folder the action should deploy
-          clean: true                # remove existing contents before deploy
-          commit-message: "🚀 Deploy from GitHub Actions"
+          personal_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          # optional: clean before publish
+          clean: true

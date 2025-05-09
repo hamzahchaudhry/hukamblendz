@@ -3,12 +3,12 @@ name: Build and deploy
 on:
   push:
     branches:
-      - main # or your default branch
+      - main
 
 permissions:
-  contents: read # for checkout
-  pages: write # to publish
-  id-token: write # for deploy-pages
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: '18'
 
       - name: Install dependencies
         run: npm ci

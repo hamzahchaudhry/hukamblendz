@@ -1,38 +1,36 @@
-name: Build & deploy to GitHub Pages
+name: Build & Deploy to GitHub Pages
 
-# Run on every push to your main branch
 on:
   push:
     branches:
-      - main    # or replace with your default branch
+      - main    # or your default branch
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout your code
-      - name: Checkout repo
+      # 1) Check out the code
+      - name: Checkout
         uses: actions/checkout@v3
 
-      # 2. Setup Node.js (match your local version)
+      # 2) Set up Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      # 3. Install dependencies
-      - name: Install dependencies
-        run: npm ci
+      # 3) Install deps & build
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
 
-      # 4. Build the static site into `dist/`
-      - name: Build site
-        run: npm run build
-
-      # 5. Deploy `dist/` to the gh-pages branch
+      # 4) Deploy the `dist/` folder to the `gh-pages` branch
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: ./dist
+          branch: gh-pages           # the branch the action should deploy to
+          folder: dist               # the folder the action should deploy
+          clean: true                # remove existing contents before deploy
+          commit-message: "🚀 Deploy from GitHub Actions"
